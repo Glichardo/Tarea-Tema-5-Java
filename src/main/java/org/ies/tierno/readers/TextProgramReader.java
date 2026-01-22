@@ -2,23 +2,29 @@ package org.ies.tierno.readers;
 
 import org.ies.tierno.files.TextFile;
 import org.ies.tierno.program.Program;
+import java.util.Random;
 
 public class TextProgramReader implements Reader<Program<TextFile>> {
+
+    private final static String[] PATHS = {"Escritorio/trabajo.docx", "Escritorio/apuntesCSS.txt", "Documentos/nota.txt", "Descargas/manual.txt", "Documentos/diario.txt", "Escritorio/recordatorio.txt", "Documentos/receta.txt", "Descargas/proyecto.txt", "Escritorio/mensaje.txt", "Documentos/informe.txt"};
+    private final static String[] TEXTS = {"java mola un montón, mas que C++ o Python...", "css es para dar estilos a mi pagina web...", "hoy he aprendido herencia en java y es complicao", "Manual de usuario: pulsa boton de encendido...", "Querido diario, hoy estaba bebiendo mi cocacola...", "ejercicio de programacion: tarea4, entregar este finde", "Ingredientes: cebolla, ajo y tomate...", "Proyecto Soterramiento de la A-5...", "probando probando 123", "Este texto es un ejemplo de archivo aleatorio"};
+
+    private Random random;
+    public TextProgramReader(Random random) {
+    this.random = random;
+    }
     @Override
     public Program<TextFile> read() {
-        TextFile[] files = {
-                new TextFile(1456, "Escritorio/trabajo de programación.docx", "java mola un montón, mas que C++ o Python, aunque es muy dificil. Lorem ipsum bla bla bla..."),
-                new TextFile(645, "Escritorio/apuntes CSS.txt", "css es para dar estilos a mi pagina web. tiene cosas interesantes, por ejemplo con 'text-decoration: underline' puedo subrayar cualquier texto"),
-                new TextFile(7342, "/Usuario/rodrigo/Documentos/Rockstar Games/GTAVI/crash.log", "Vaya! El programa se ha cerrado inesperadamente... Se han enviado todos tus datos fiscales a Rockstar Games"),
-                new TextFile(210, "Documentos/notas.txt", "hoy he aprendido herencia en java y es complicao"),
-                new TextFile(980, "Descargas/manual.txt", "Manual de usuario: pulsa boton de encendido y listo."),
-                new TextFile(1200, "Documentos/diario.txt", "Querido diario, hoy estaba bebiendo mi cocacola del burger king y el vaso de papel biodegradable se estaba biodegradando en mis manos, pero no pasa nada porque taylor swift solo ha cogido su yet privado por quinta vez hoy asi que estamos salvando el planeta"),
-                new TextFile(540, "Escritorio/recordatorio.txt", "ejercicio de programacion: tarea4, entregar este finde"),
-                new TextFile(360, "Documentos/receta.txt", "Ingredientes: cebolla, ajo y tomate. hacemos el sofrito hasta que dore, luego ponemos pimenton dulce y picante. disfruta el sofrito y usalo con lo que quieras."),
-                new TextFile(890, "Descargas/proyectoFgewr95wy.txt", "Proyecto Soterramiento de la A-5: se planea terminar en noviembre de 2036."),
-                new TextFile(130, "Escritorio/mensaje.txt", "probando probando 123")
-        };
+        int number = random.nextInt(1, 9);
+
+        TextFile[] files = new TextFile[number];
+
+        for (int i = 0; i < number; i++) {
+            int size = random.nextInt(100, 2000);
+            String path = PATHS[random.nextInt(PATHS.length)];
+            String text = TEXTS[random.nextInt(TEXTS.length)];
+            files[i] = new TextFile(size, path, text);
+        }
         return new Program<>(files, "Bloc de notas");
     }
-
 }

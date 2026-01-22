@@ -6,22 +6,24 @@ import org.ies.tierno.files.TextFile;
 import org.ies.tierno.program.Program;
 import org.ies.tierno.readers.*;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
         int option;
 
         do {
             option = showMenu(scanner);
 
             if (option == 1) {
-                textProgram(scanner);
+                textProgram(scanner, random);
             } else if (option == 2) {
-                imageProgram(scanner);
+                imageProgram(scanner, random);
             }else if (option == 3) {
-                audioProgram(scanner);
+                audioProgram(scanner, random);
             }else if (option == 4) {
 
             } else{
@@ -45,8 +47,8 @@ public class Main {
 
     }
 
-    public static void textProgram(Scanner scanner) {
-        Reader<Program<TextFile>> textReader = new TextProgramReader();
+    public static void textProgram(Scanner scanner, Random random) {
+        Reader<Program<TextFile>> textReader = new TextProgramReader(random);
         Program<TextFile> program = textReader.read();
 
         System.out.println("Introduce output path: ");
@@ -54,8 +56,8 @@ public class Main {
         program.execute(outputPath);
     }
 
-    public static void imageProgram(Scanner scanner) {
-        Reader<Program<ImageFile>> imageReader = new ImageProgramReader();
+    public static void imageProgram(Scanner scanner, Random random) {
+        Reader<Program<ImageFile>> imageReader = new ImageProgramReader(random);
         Program<ImageFile> program = imageReader.read();
 
         System.out.print("Introduce el path de salida: ");
@@ -63,8 +65,8 @@ public class Main {
         program.execute(outputPath);
     }
 
-    public static void audioProgram(Scanner scanner) {
-        Reader<Program<AudioFile>> audioReader = new AudioProgramReader();
+    public static void audioProgram(Scanner scanner, Random random) {
+        Reader<Program<AudioFile>> audioReader = new AudioProgramReader(random);
         Program<AudioFile> program = audioReader.read();
 
         System.out.print("Introduce el path de salida: ");
