@@ -48,8 +48,9 @@ public class Main {
     }
 
     public static void textProgram(Scanner scanner, Random random) {
-        Reader<Program<TextFile>> textReader = new TextProgramReader(random);
-        Program<TextFile> program = textReader.read();
+        TextReader textReader = new TextReader();
+        Reader<Program<TextFile>> textProgramReader = new TextProgramReader(random, textReader);
+        Program<TextFile> program = textProgramReader.read();
 
         System.out.println("Introduce output path: ");
         String outputPath = scanner.nextLine();
@@ -57,8 +58,9 @@ public class Main {
     }
 
     public static void imageProgram(Scanner scanner, Random random) {
-        Reader<Program<ImageFile>> imageReader = new ImageProgramReader(random);
-        Program<ImageFile> program = imageReader.read();
+        ImageReader imageReader = new ImageReader();
+        Reader<Program<ImageFile>> imageProgramReader = new ImageProgramReader(random, imageReader);
+        Program<ImageFile> program = imageProgramReader.read();
 
         System.out.print("Introduce el path de salida: ");
         String outputPath = scanner.nextLine();
@@ -66,8 +68,9 @@ public class Main {
     }
 
     public static void audioProgram(Scanner scanner, Random random) {
-        Reader<Program<AudioFile>> audioReader = new AudioProgramReader(random);
-        Program<AudioFile> program = audioReader.read();
+        AudioReader audioReader = new AudioReader();
+        Reader<Program<AudioFile>> audioProgramReader = new AudioProgramReader(random, audioReader);
+        Program<AudioFile> program = audioProgramReader.read();
 
         System.out.print("Introduce el path de salida: ");
         String outputPath = scanner.nextLine();
